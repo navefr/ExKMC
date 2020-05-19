@@ -1,4 +1,2 @@
 from cut_finder import get_min_mistakes_cut
-from cut_finder import get_min_mistakes_cut_parallel
 from cut_finder import get_min_surrogate_cut
-from cut_finder import get_min_surrogate_cut_parallel

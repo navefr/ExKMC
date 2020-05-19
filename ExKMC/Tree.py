@@ -4,9 +4,7 @@ from collections import Counter
 from sklearn.cluster import KMeans
 from graphviz import Source
 from .splitters import get_min_mistakes_cut
-from .splitters import get_min_mistakes_cut_parallel
 from .splitters import get_min_surrogate_cut
-from .splitters import get_min_surrogate_cut_parallel
 
 
 BASE_TREE = ['IMM', 'NONE']
@@ -39,7 +37,7 @@ class Tree:
         if base_tree not in BASE_TREE:
             raise Exception(base_tree + ' is not a supported base tree')
         self.base_tree = base_tree
-        self.n_jobs = n_jobs
+        self.n_jobs = n_jobs if n_jobs is not None else 1
         self._feature_importance = None
 
     def _build_tree(self, x_data, y, valid_centers, valid_cols):
@@ -67,10 +65,7 @@ class Tree:
                 # Verify data type is float64 prior to cython call
                 x_data = x_data.astype(np.float64, copy=False)
 
-                if self.n_jobs is None or self.n_jobs <= 1:
-                    cut = get_min_mistakes_cut(x_data, y, self.all_centers, valid_centers, valid_cols)
-                else:
-                    cut = get_min_mistakes_cut_parallel(x_data, y, self.all_centers, valid_centers, valid_cols, self.n_jobs)
+                cut = get_min_mistakes_cut(x_data, y, self.all_centers, valid_centers, valid_cols, self.n_jobs)
 
                 if cut is None:
                     node.value = np.argmax(valid_centers)
@@ -361,10 +356,7 @@ class Tree:
         X_center_dot = leaf_data[LEAF_DATA_KEY_X_CENTER_DOT].astype(np.float64, copy=False)
         all_centers_norm_sqr = all_centers_norm_sqr.astype(np.float64, copy=False)
 
-        if self.n_jobs is None or self.n_jobs <= 1:
-            min_cut = get_min_surrogate_cut(X, X_center_dot, all_centers_norm_sqr)
-        else:
-            min_cut = get_min_surrogate_cut_parallel(X, X_center_dot, X_center_dot.sum(axis=0), all_centers_norm_sqr, self.n_jobs)
+        min_cut = get_min_surrogate_cut(X, X_center_dot, X_center_dot.sum(axis=0), all_centers_norm_sqr, self.n_jobs)
 
         if min_cut is not None:
             pre_split_cost = self.get_leaf_pre_split_cost(X_center_dot, all_centers_norm_sqr)
