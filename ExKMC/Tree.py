@@ -6,7 +6,6 @@ from graphviz import Source
 from .splitters import get_min_mistakes_cut
 from .splitters import get_min_surrogate_cut
 
-
 BASE_TREE = ['IMM', 'NONE']
 
 LEAF_DATA_KEY_X_DATA = 'X_DATA_KEY'
@@ -52,7 +51,6 @@ class Tree:
         if self.verbose > 1:
             print('build node (samples=%d)' % x_data.shape[0])
         node = Node()
-        node.samples = x_data.shape[0]
         if valid_centers.sum() == 1:
             node.value = np.argmax(valid_centers)
             return node
@@ -129,7 +127,7 @@ class Tree:
 
         if self.max_leaves > leaves:
             self.__gather_leaves_data__(self.tree, x_data, y)
-            all_centers_norm_sqr = (np.linalg.norm(self.all_centers, axis=1)**2).astype(np.float64, copy=False)
+            all_centers_norm_sqr = (np.linalg.norm(self.all_centers, axis=1) ** 2).astype(np.float64, copy=False)
             self.__expand_tree__(leaves, all_centers_norm_sqr)
             if self.light:
                 self._leaves_data = {}
@@ -248,36 +246,26 @@ class Tree:
             dot_str = ["digraph ClusteringTree {\n"]
             queue = [self.tree]
             nodes = []
-            leaves = []
             edges = []
             id = 0
             while len(queue) > 0:
                 curr = queue.pop(0)
-                if not curr.is_leaf():
-                    nodes.append({"id": id,
-                                  "condition": "%s <= %.3f" % (
-                                  curr.feature if feature_names is None else feature_names[curr.feature], curr.value),
-                                  "samples": curr.samples,
-                                  "mistakes": curr.mistakes,
-                                  "node": curr})
+                if curr.is_leaf():
+                    label = "%s\nsamples=\%d\nmistakes=\%d" % (str(curr.value), curr.samples, curr.mistakes)
+                else:
+                    feature_name = curr.feature if feature_names is None else feature_names[curr.feature]
+                    condition = "%s <= %.3f" % (feature_name, curr.value)
+                    label = "%s\nsamples=\%d" % (condition, curr.samples)
                     queue.append(curr.left)
                     queue.append(curr.right)
                     edges.append((id, id + len(queue) - 1))
                     edges.append((id, id + len(queue)))
-                else:
-                    leaves.append({"id": id,
-                                   "condition": "%s" % (str(curr.value)),
-                                   "samples": curr.samples,
-                                   "mistakes": curr.mistakes,
-                                   "node": curr})
+                nodes.append({"id": id,
+                              "label": label,
+                              "node": curr})
                 id += 1
             for node in nodes:
-                # dot_str.append("n_%d [label=\"%s\nsamples=\%d\nmistakes=\%d\"];\n" % (node["id"], node["condition"], node["samples"], node["mistakes"]))
-                dot_str.append("n_%d [label=\"%s\nsamples=\%d\"];\n" % (node["id"], node["condition"], node["samples"]))
-            for leaf in leaves:
-                # dot_str.append("n_%d [label=\"%s\nsamples=\%d\"];\n" % (leaf["id"], leaf["condition"], leaf["samples"]))
-                dot_str.append("n_%d [label=\"%s\nsamples=\%d\nmistakes=\%d\"];\n" % (
-                leaf["id"], leaf["condition"], leaf["samples"], leaf["mistakes"]))
+                dot_str.append("n_%d [label=\"%s\"];\n" % (node["id"], node["label"]))
             for edge in edges:
                 dot_str.append("n_%d -> n_%d;\n" % (edge[0], edge[1]))
             dot_str.append("}")
@@ -299,7 +287,8 @@ class Tree:
             leaf_count = 1
             for leaf in self._leaves_data:
                 if self.verbose > 1:
-                    print('-- expand leaf. %d/%d (samples=%d)' % (leaf_count, len(self._leaves_data), self._leaves_data[leaf][LEAF_DATA_KEY_X_DATA].shape[0]))
+                    print('-- expand leaf. %d/%d (samples=%d)' % (
+                        leaf_count, len(self._leaves_data), self._leaves_data[leaf][LEAF_DATA_KEY_X_DATA].shape[0]))
                 if LEAF_DATA_KEY_SPLITTER not in self._leaves_data[leaf]:
                     self._leaves_data[leaf][LEAF_DATA_KEY_SPLITTER] = self.__expand_leaf__(leaf, all_centers_norm_sqr)
                 leaf_splitter = self._leaves_data[leaf][LEAF_DATA_KEY_SPLITTER]
@@ -339,7 +328,8 @@ class Tree:
         if node.is_leaf():
             self._leaves_data[node] = {LEAF_DATA_KEY_X_DATA: x_data,
                                        LEAF_DATA_KEY_Y: y,
-                                       LEAF_DATA_KEY_X_CENTER_DOT: np.dot(x_data, self.all_centers.T).astype(np.float64, copy=False)}
+                                       LEAF_DATA_KEY_X_CENTER_DOT: np.dot(x_data, self.all_centers.T).astype(np.float64,
+                                                                                                             copy=False)}
         else:
             left_mask = x_data[:, node.feature] <= node.value
             self.__gather_leaves_data__(node.left, x_data[left_mask], y[left_mask])
@@ -379,16 +369,12 @@ class Tree:
     def __split_leaf__(self, leaf, feature, value, left_cluster, right_cluster):
         leaf.feature = feature
         leaf.value = value
-        leaf.samples = 0
-        leaf.mistakes = 0
 
         leaf.left = Node()
         leaf.left.value = left_cluster
-        leaf.left.samples = 0
 
         leaf.right = Node()
         leaf.right.value = right_cluster
-        leaf.right.samples = 0
 
     def __fill_stats__(self, node, x_data, y):
         node.samples = x_data.shape[0]
@@ -402,6 +388,7 @@ class Tree:
 
     def feature_importance(self):
         return self._feature_importance
+
 
 class Node:
     def __init__(self):
@@ -430,4 +417,3 @@ def convert_input(data):
     else:
         raise Exception(type(data) + ' is not supported type')
     return data
-
