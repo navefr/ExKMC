@@ -43,7 +43,7 @@ def get_min_mistakes_cut(NP_FLOAT_t[:,:] X, NP_INT_t[:] y, NP_FLOAT_t[:,:] cente
     # Count the number of data points for each center.
     # This information will be helpful for fast mistakes calculation, once a threshold pass a center.
     for i in range(k):
-        centers_count[i] += 0
+        centers_count[i] = 0
     for i in range(n):
         centers_count[y[i]] += 1
 

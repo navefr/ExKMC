@@ -1204,8 +1204,8 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 struct __pyx_t_10cut_finder_IMM_Cut;
 struct __pyx_t_10cut_finder_Surrogate_Cut;
-struct __pyx_ctuple_a8703____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc;
-typedef struct __pyx_ctuple_a8703____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc __pyx_ctuple_a8703____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc;
+struct __pyx_ctuple_a9a35____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc;
+typedef struct __pyx_ctuple_a9a35____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc __pyx_ctuple_a9a35____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc;
 
 /* "cut_finder.pyx":24
  * 
@@ -1241,7 +1241,7 @@ struct __pyx_t_10cut_finder_Surrogate_Cut {
  *     cdef int best_col = -1
  *     cdef NP_FLOAT_t best_cost = INFINITY
  */
-struct __pyx_ctuple_a8703____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc {
+struct __pyx_ctuple_a9a35____dunderpyx_t_10cut_finder_NP_FLOAT_t__and___dunderpyx_t_10cut_finder_NP_FLOAT_t__and_int__and_int__etc {
   __pyx_t_10cut_finder_NP_FLOAT_t f0;
   __pyx_t_10cut_finder_NP_FLOAT_t f1;
   int f2;
@@ -2672,17 +2672,16 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
   int __pyx_t_1;
   int __pyx_t_2;
   int __pyx_t_3;
-  int __pyx_t_4;
-  Py_ssize_t __pyx_t_5;
-  __pyx_t_10cut_finder_NP_INT_t __pyx_t_6;
-  int __pyx_t_7;
-  PyObject *__pyx_t_8 = NULL;
+  Py_ssize_t __pyx_t_4;
+  __pyx_t_10cut_finder_NP_INT_t __pyx_t_5;
+  int __pyx_t_6;
+  PyObject *__pyx_t_7 = NULL;
+  int __pyx_t_8;
   int __pyx_t_9;
-  int __pyx_t_10;
+  Py_ssize_t __pyx_t_10;
   Py_ssize_t __pyx_t_11;
   Py_ssize_t __pyx_t_12;
-  Py_ssize_t __pyx_t_13;
-  PyObject *__pyx_t_14 = NULL;
+  PyObject *__pyx_t_13 = NULL;
   __Pyx_RefNannySetupContext("get_min_mistakes_cut", 0);
 
   /* "cut_finder.pyx":32
@@ -2761,7 +2760,7 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *     # Count the number of data points for each center.
  *     # This information will be helpful for fast mistakes calculation, once a threshold pass a center.
  *     for i in range(k):             # <<<<<<<<<<<<<<
- *         centers_count[i] += 0
+ *         centers_count[i] = 0
  *     for i in range(n):
  */
   __pyx_t_1 = __pyx_v_k;
@@ -2772,17 +2771,16 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
     /* "cut_finder.pyx":46
  *     # This information will be helpful for fast mistakes calculation, once a threshold pass a center.
  *     for i in range(k):
- *         centers_count[i] += 0             # <<<<<<<<<<<<<<
+ *         centers_count[i] = 0             # <<<<<<<<<<<<<<
  *     for i in range(n):
  *         centers_count[y[i]] += 1
  */
-    __pyx_t_4 = __pyx_v_i;
-    (__pyx_v_centers_count[__pyx_t_4]) = ((__pyx_v_centers_count[__pyx_t_4]) + 0);
+    (__pyx_v_centers_count[__pyx_v_i]) = 0;
   }
 
   /* "cut_finder.pyx":47
  *     for i in range(k):
- *         centers_count[i] += 0
+ *         centers_count[i] = 0
  *     for i in range(n):             # <<<<<<<<<<<<<<
  *         centers_count[y[i]] += 1
  * 
@@ -2793,15 +2791,15 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
     __pyx_v_i = __pyx_t_3;
 
     /* "cut_finder.pyx":48
- *         centers_count[i] += 0
+ *         centers_count[i] = 0
  *     for i in range(n):
  *         centers_count[y[i]] += 1             # <<<<<<<<<<<<<<
  * 
  *     if njobs is None or njobs <= 1:
  */
-    __pyx_t_5 = __pyx_v_i;
-    __pyx_t_6 = (*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_5 * __pyx_v_y.strides[0]) )));
-    (__pyx_v_centers_count[__pyx_t_6]) = ((__pyx_v_centers_count[__pyx_t_6]) + 1);
+    __pyx_t_4 = __pyx_v_i;
+    __pyx_t_5 = (*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_y.data + __pyx_t_4 * __pyx_v_y.strides[0]) )));
+    (__pyx_v_centers_count[__pyx_t_5]) = ((__pyx_v_centers_count[__pyx_t_5]) + 1);
   }
 
   /* "cut_finder.pyx":50
@@ -2811,20 +2809,20 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *         # Iterate over valid coordinates
  *         for col in range(d):
  */
-  __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_njobs); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_9 = (__pyx_t_8 == Py_None);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_10 = (__pyx_t_9 != 0);
-  if (!__pyx_t_10) {
+  __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_njobs); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_8 = (__pyx_t_7 == Py_None);
+  __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+  __pyx_t_9 = (__pyx_t_8 != 0);
+  if (!__pyx_t_9) {
   } else {
-    __pyx_t_7 = __pyx_t_10;
+    __pyx_t_6 = __pyx_t_9;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_10 = ((__pyx_v_njobs <= 1) != 0);
-  __pyx_t_7 = __pyx_t_10;
+  __pyx_t_9 = ((__pyx_v_njobs <= 1) != 0);
+  __pyx_t_6 = __pyx_t_9;
   __pyx_L8_bool_binop_done:;
-  if (__pyx_t_7) {
+  if (__pyx_t_6) {
 
     /* "cut_finder.pyx":52
  *     if njobs is None or njobs <= 1:
@@ -2845,9 +2843,9 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *                 update_col_min_mistakes_cut(X, y, centers, valid_centers, centers_count, cols_thresholds, cols_mistakes, col, n, d, k)
  *     else:
  */
-      __pyx_t_11 = __pyx_v_col;
-      __pyx_t_7 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_11 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
-      if (__pyx_t_7) {
+      __pyx_t_10 = __pyx_v_col;
+      __pyx_t_6 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_10 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
+      if (__pyx_t_6) {
 
         /* "cut_finder.pyx":54
  *         for col in range(d):
@@ -2906,7 +2904,7 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
               if (__pyx_t_3 > 0)
               {
                   #ifdef _OPENMP
-                  #pragma omp parallel num_threads(__pyx_v_njobs) private(__pyx_t_12, __pyx_t_7)
+                  #pragma omp parallel num_threads(__pyx_v_njobs) private(__pyx_t_11, __pyx_t_6)
                   #endif /* _OPENMP */
                   {
                       #ifdef _OPENMP
@@ -2923,9 +2921,9 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *                 update_col_min_mistakes_cut(X, y, centers, valid_centers, centers_count, cols_thresholds, cols_mistakes, col, n, d, k)
  * 
  */
-                              __pyx_t_12 = __pyx_v_col;
-                              __pyx_t_7 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_12 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
-                              if (__pyx_t_7) {
+                              __pyx_t_11 = __pyx_v_col;
+                              __pyx_t_6 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_11 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
+                              if (__pyx_t_6) {
 
                                 /* "cut_finder.pyx":59
  *         for col in prange(d, nogil=True, num_threads=njobs):
@@ -2997,9 +2995,9 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *             # We found a valid split
  *             if cols_mistakes[col] != -1:
  */
-    __pyx_t_13 = __pyx_v_col;
-    __pyx_t_7 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_13 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
-    if (__pyx_t_7) {
+    __pyx_t_12 = __pyx_v_col;
+    __pyx_t_6 = (((*((__pyx_t_10cut_finder_NP_INT_t *) ( /* dim=0 */ (__pyx_v_valid_cols.data + __pyx_t_12 * __pyx_v_valid_cols.strides[0]) ))) == 1) != 0);
+    if (__pyx_t_6) {
 
       /* "cut_finder.pyx":65
  *         if valid_cols[col] == 1:
@@ -3008,8 +3006,8 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *                 # This is a better cut
  *                 if cols_mistakes[col] < min_mistakes:
  */
-      __pyx_t_7 = (((__pyx_v_cols_mistakes[__pyx_v_col]) != -1L) != 0);
-      if (__pyx_t_7) {
+      __pyx_t_6 = (((__pyx_v_cols_mistakes[__pyx_v_col]) != -1L) != 0);
+      if (__pyx_t_6) {
 
         /* "cut_finder.pyx":67
  *             if cols_mistakes[col] != -1:
@@ -3018,8 +3016,8 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *                     best_col = col
  *                     min_mistakes = cols_mistakes[col]
  */
-        __pyx_t_7 = (((__pyx_v_cols_mistakes[__pyx_v_col]) < __pyx_v_min_mistakes) != 0);
-        if (__pyx_t_7) {
+        __pyx_t_6 = (((__pyx_v_cols_mistakes[__pyx_v_col]) < __pyx_v_min_mistakes) != 0);
+        if (__pyx_t_6) {
 
           /* "cut_finder.pyx":68
  *                 # This is a better cut
@@ -3074,8 +3072,8 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *         best_threshold = cols_thresholds[best_col]
  * 
  */
-  __pyx_t_7 = ((__pyx_v_best_col != -1L) != 0);
-  if (__pyx_t_7) {
+  __pyx_t_6 = ((__pyx_v_best_col != -1L) != 0);
+  if (__pyx_t_6) {
 
     /* "cut_finder.pyx":72
  * 
@@ -3129,8 +3127,8 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  *         return None
  *     else:
  */
-  __pyx_t_7 = ((__pyx_v_best_col == -1L) != 0);
-  if (__pyx_t_7) {
+  __pyx_t_6 = ((__pyx_v_best_col == -1L) != 0);
+  if (__pyx_t_6) {
 
     /* "cut_finder.pyx":79
  * 
@@ -3161,18 +3159,18 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_8 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 81, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_14 = __Pyx_PyInt_From_int(__pyx_v_best_col); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 81, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_14);
-    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_col, __pyx_t_14) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-    __pyx_t_14 = PyFloat_FromDouble(__pyx_v_best_threshold); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 81, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_14);
-    if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_threshold, __pyx_t_14) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-    __pyx_r = __pyx_t_8;
-    __pyx_t_8 = 0;
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_7);
+    __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_best_col); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_13);
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_col, __pyx_t_13) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+    __pyx_t_13 = PyFloat_FromDouble(__pyx_v_best_threshold); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 81, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_13);
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_threshold, __pyx_t_13) < 0) __PYX_ERR(0, 81, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+    __pyx_r = __pyx_t_7;
+    __pyx_t_7 = 0;
     goto __pyx_L0;
   }
 
@@ -3186,8 +3184,8 @@ static PyObject *__pyx_pf_10cut_finder_get_min_mistakes_cut(CYTHON_UNUSED PyObje
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_8);
-  __Pyx_XDECREF(__pyx_t_14);
+  __Pyx_XDECREF(__pyx_t_7);
+  __Pyx_XDECREF(__pyx_t_13);
   __Pyx_AddTraceback("cut_finder.get_min_mistakes_cut", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
