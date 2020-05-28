@@ -2,9 +2,14 @@ import numpy as np
 import pandas as pd
 from collections import Counter
 from sklearn.cluster import KMeans
-from graphviz import Source
 from .splitters import get_min_mistakes_cut
 from .splitters import get_min_surrogate_cut
+
+try:
+    from graphviz import Source
+    graphviz_available = True
+except Exception:
+    graphviz_available = False
 
 BASE_TREE = ['IMM', 'NONE']
 
@@ -62,6 +67,10 @@ class Tree:
 
                 # Verify data type is float64 prior to cython call
                 x_data = x_data.astype(np.float64, copy=False)
+                y = y.astype(np.int32, copy=False)
+                self.all_centers = self.all_centers.astype(np.float64, copy=False)
+                valid_centers = valid_centers.astype(np.int32, copy=False)
+                valid_cols = valid_cols.astype(np.int32, copy=False)
 
                 cut = get_min_mistakes_cut(x_data, y, self.all_centers, valid_centers, valid_cols, self.n_jobs)
 
@@ -117,8 +126,8 @@ class Tree:
 
         if self.base_tree == "IMM":
             self.tree = self._build_tree(x_data, y,
-                                         np.ones(self.all_centers.shape[0], dtype=int),
-                                         np.ones(self.all_centers.shape[1], dtype=int))
+                                         np.ones(self.all_centers.shape[0], dtype=np.int32),
+                                         np.ones(self.all_centers.shape[1], dtype=np.int32))
             leaves = self.k
         else:
             self.tree = Node()
@@ -242,6 +251,9 @@ class Tree:
             return 1 + max(dl, dr)
 
     def plot(self, filename="test", feature_names=None):
+        if not graphviz_available:
+            raise Exception("Required package is missing. Please install graphviz")
+
         if self.tree is not None:
             dot_str = ["digraph ClusteringTree {\n"]
             queue = [self.tree]
