@@ -25,3 +25,20 @@ prediction = tree.fit_predict(make_blobs(100, 10, 3))
 # Tree plot saved to filename
 tree.plot('filename')
 ```
+
+## Citation
+If you use ExKMC in your research we would appreciate a citation to the appropriate paper(s):
+
+* For IMM base tree:
+   ```bash
+   @article{dasgupta2020explainable,
+     title={Explainable $k$-Means and $k$-Medians Clustering},
+     author={Dasgupta, Sanjoy and Frost, Nave and Moshkovitz, Michal and Rashtchian, Cyrus},
+     journal={arXiv preprint arXiv:2002.12538},
+     year={2020}
+   }
+   ```
+* For ExKMC expansion:
+   ```bash
+   will be avilable soon
+   ```
