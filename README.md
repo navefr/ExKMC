@@ -9,8 +9,8 @@ While larger trees produce more accurate clusterings, they also require more com
 To allow flexibility, we develop a new explainable k-means clustering algorithm, ExKMC, that takes an additional parameter k' &#8805; k and outputs a decision tree with k' leaves. 
 We use a new surrogate cost to efficiently expand the tree and to label the leaves with one of k clusters. 
 We prove that as k' increases, the surrogate cost is non-increasing, and hence, we trade explainability for accuracy.
-  
-![Exapmle](https://www.cs.tau.ac.il/~navefrost/images/example.PNG)
+
+<img src="https://www.cs.tau.ac.il/~navefrost/images/example.PNG">
 
 
 ## Installation
