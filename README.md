@@ -2,6 +2,16 @@
 
 This repository is the official implementation of ExKMC: Expanding Explainable k-Means Clustering. 
 
+We study algorithms for k-means clustering, focusing on a trade-off between explainability and accuracy. 
+Following prior work, we partition a dataset into k clusters via a small decision tree. 
+This enables us to explain each cluster assignment by a short sequence of single-feature thresholds. 
+While larger trees produce more accurate clusterings, they also require more complex explanations. 
+To allow flexibility, we develop a new explainable k-means clustering algorithm, ExKMC, that takes an additional parameter k' &#8805; k and outputs a decision tree with k' leaves. 
+We use a new surrogate cost to efficiently expand the tree and to label the leaves with one of k clusters. 
+We prove that as k' increases, the surrogate cost is non-increasing, and hence, we trade explainability for accuracy.
+  
+![Exapmle](https://www.cs.tau.ac.il/~navefrost/images/example.PNG)
+
 
 ## Installation
 
