@@ -29,6 +29,7 @@ class Tree:
         :param verbose: Verbosity mode.
         :param light: If False, the object will store a copy of the input examples associated with each leaf.
         :param base_tree: Specify weather the first k leaves are generated according to IMM splitting criteria or not. Valid values are ["IMM", "NONE"].
+        :param n_jobs: The number of jobs to run in parallel.
         """
         self.k = k
         self.tree = None
@@ -361,7 +362,7 @@ class Tree:
         min_cut = get_min_surrogate_cut(X, X_center_dot, X_center_dot.sum(axis=0), all_centers_norm_sqr, self.n_jobs)
 
         if min_cut is not None:
-            pre_split_cost = self.get_leaf_pre_split_cost(X_center_dot, all_centers_norm_sqr)
+            pre_split_cost = self.__get_leaf_pre_split_cost__(X_center_dot, all_centers_norm_sqr)
             splitter = {"col": min_cut["col"],
                         "threshold": min_cut["threshold"],
                         "cost_gain": min_cut["cost"] - pre_split_cost,
@@ -371,7 +372,7 @@ class Tree:
         else:
             return None
 
-    def get_leaf_pre_split_cost(self, X_center_dot, all_centers_norm_sqr):
+    def __get_leaf_pre_split_cost__(self, X_center_dot, all_centers_norm_sqr):
         n = X_center_dot.shape[0]
 
         cost_per_center = (n * all_centers_norm_sqr) - 2 * X_center_dot.sum(axis=0)

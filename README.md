@@ -10,7 +10,7 @@ To allow flexibility, we develop a new explainable k-means clustering algorithm,
 We use a new surrogate cost to efficiently expand the tree and to label the leaves with one of k clusters. 
 We prove that as k' increases, the surrogate cost is non-increasing, and hence, we trade explainability for accuracy.
 
-<img src="https://www.cs.tau.ac.il/~navefrost/images/example_pic.PNG">
+![](images\example.PNG)
 
 
 ## Installation
@@ -26,20 +26,31 @@ pip install ExKMC
 from ExKMC.Tree import Tree
 from sklearn.datasets import make_blobs
 
+# Create dataset
+n = 100
+d = 10
+k = 3
+X = make_blobs(n, d, k)
+
 # Initialize tree with up to 6 leaves, predicting 3 clusters
-tree = Tree(k=3, max_leaves=6) 
+tree = Tree(k=k, max_leaves=2*k) 
 
 # Construct the tree, and return cluster labels
-prediction = tree.fit_predict(make_blobs(100, 10, 3))
+prediction = tree.fit_predict(X)
 
 # Tree plot saved to filename
 tree.plot('filename')
 ```
 
+## Notebooks
+Usage examples:
+* [Expand tree for gaussians](notebooks/Example.ipynb)
+* [Expand tree for text data](notebooks/Newsgroups%20example.ipynb)
+
 ## Citation
 If you use ExKMC in your research we would appreciate a citation to the appropriate paper(s):
 
-* For IMM base tree:
+* For IMM base tree you can read our [ICML 2020 paper](https://arxiv.org/pdf/2002.12538.pdf).
    ```bash
    @article{dasgupta2020explainable,
      title={Explainable $k$-Means and $k$-Medians Clustering},
@@ -52,3 +63,7 @@ If you use ExKMC in your research we would appreciate a citation to the appropri
    ```bash
    will be avilable soon
    ```
+## Contact
+* [Nave Frost](mailto:navefrost@mail.tau.ac.il)
+* [Michal Moshkovitz](https://sites.google.com/view/michal-moshkovitz)
+* [Cyrus Rashtchian](https://sites.google.com/site/cyrusrashtchian/) 
