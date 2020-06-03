@@ -44,7 +44,7 @@ tree.plot('filename')
 
 ## Notebooks
 Usage examples:
-* [Expand tree for gaussians](notebooks/Example.ipynb)
+* [Expand tree for Gaussians](notebooks/Example.ipynb)
 * [Expand tree for text data](notebooks/Newsgroups%20example.ipynb)
 
 ## Citation
