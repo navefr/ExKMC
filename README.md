@@ -30,7 +30,7 @@ from sklearn.datasets import make_blobs
 n = 100
 d = 10
 k = 3
-X, _ = make_blobs(n, d, k)
+X, _ = make_blobs(n, d, k, cluster_std=3.0)
 
 # Initialize tree with up to 6 leaves, predicting 3 clusters
 tree = Tree(k=k, max_leaves=2*k) 
