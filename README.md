@@ -10,7 +10,7 @@ To allow flexibility, we develop a new explainable k-means clustering algorithm,
 We use a new surrogate cost to efficiently expand the tree and to label the leaves with one of k clusters. 
 We prove that as k' increases, the surrogate cost is non-increasing, and hence, we trade explainability for accuracy.
 
-![](images\example.PNG)
+![](images/example.PNG)
 
 
 ## Installation
