@@ -1,6 +1,6 @@
 # ExKMC
 
-This repository is the official implementation of ExKMC: Expanding Explainable k-Means Clustering. 
+This repository is the official implementation of [ExKMC: Expanding Explainable k-Means Clustering](https://arxiv.org/pdf/2006.02399.pdf). 
 
 We study algorithms for k-means clustering, focusing on a trade-off between explainability and accuracy. 
 Following prior work, we partition a dataset into k clusters via a small decision tree. 
@@ -59,9 +59,14 @@ If you use ExKMC in your research we would appreciate a citation to the appropri
      year={2020}
    }
    ```
-* For ExKMC expansion:
+* For ExKMC expansion you can read our [paper](https://arxiv.org/pdf/2006.02399.pdf).
    ```bash
-   will be avilable soon
+   @article{frost2020exkmc,
+     title={ExKMC: Expanding Explainable $k$-Means Clustering},
+     author={Nave Frost and Michal Moshkovitz and Cyrus Rashtchian},
+     journal={arXiv preprint arXiv:2006.02399},
+     year={2020}
+   }
    ```
 ## Contact
 * [Nave Frost](mailto:navefrost@mail.tau.ac.il)
