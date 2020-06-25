@@ -63,7 +63,7 @@ If you use ExKMC in your research we would appreciate a citation to the appropri
    ```bash
    @article{frost2020exkmc,
      title={ExKMC: Expanding Explainable $k$-Means Clustering},
-     author={Nave Frost and Michal Moshkovitz and Cyrus Rashtchian},
+     author={Frost, Nave and Moshkovitz, Michal and Rashtchian, Cyrus},
      journal={arXiv preprint arXiv:2006.02399},
      year={2020}
    }
