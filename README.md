@@ -3,7 +3,7 @@
 This repository is the official implementation of [ExKMC: Expanding Explainable k-Means Clustering](https://arxiv.org/pdf/2006.02399.pdf). 
 
 We study algorithms for k-means clustering, focusing on a trade-off between explainability and accuracy. 
-Following prior work, we partition a dataset into k clusters via a small decision tree. 
+We partition a dataset into k clusters via a small decision tree. 
 This enables us to explain each cluster assignment by a short sequence of single-feature thresholds. 
 While larger trees produce more accurate clusterings, they also require more complex explanations. 
 To allow flexibility, we develop a new explainable k-means clustering algorithm, ExKMC, that takes an additional parameter k' &#8805; k and outputs a decision tree with k' leaves. 
@@ -15,7 +15,7 @@ We prove that as k' increases, the surrogate cost is non-increasing, and hence, 
 
 ## Installation
 
-To install requirements:
+The package is on [PyPI](https://pypi.org/project/ExKMC/). Simply run:
 ```
 pip install ExKMC
 ```
