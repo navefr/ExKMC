@@ -57,7 +57,10 @@ class Tree:
         if self.verbose > 1:
             print('build node (samples=%d)' % x_data.shape[0])
         node = Node()
-        if valid_centers.sum() == 1:
+        if x_data.shape[0] == 0:
+            node.value = 0
+            return node
+        elif valid_centers.sum() == 1:
             node.value = np.argmax(valid_centers)
             return node
         else:
