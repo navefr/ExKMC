@@ -21,7 +21,7 @@ LEAF_DATA_KEY_SPLITTER = 'SPLITTER_KEY'
 
 class Tree:
 
-    def __init__(self, k, max_leaves=None, verbose=0, light=True, base_tree='IMM', n_jobs=None):
+    def __init__(self, k, max_leaves=None, verbose=0, light=True, base_tree='IMM', n_jobs=None, random_state=None):
         """
         Constructor for explainable k-means tree.
         :param k: Number of clusters.
@@ -30,11 +30,13 @@ class Tree:
         :param light: If False, the object will store a copy of the input examples associated with each leaf.
         :param base_tree: Specify weather the first k leaves are generated according to IMM splitting criteria or not. Valid values are ["IMM", "NONE"].
         :param n_jobs: The number of jobs to run in parallel.
+        :param random_state: Determines random number generation for k-means initialization. Use an int to make the randomness deterministic.
         """
         self.k = k
         self.tree = None
         self._leaves_data = {}
         self.max_leaves = k if max_leaves is None else max_leaves
+        self.random_state = random_state
         if self.max_leaves < k:
             raise Exception('max_trees must be greater or equal to k [%d < %d]' % (self.max_leaves, k))
         self.verbose = verbose
@@ -119,7 +121,7 @@ class Tree:
         if kmeans is None:
             if self.verbose > 0:
                 print('Finding %d-means' % self.k)
-            kmeans = KMeans(self.k, n_jobs=self.n_jobs, verbose=self.verbose, n_init=1, max_iter=40)
+            kmeans = KMeans(self.k, n_jobs=self.n_jobs, verbose=self.verbose, random_state=self.random_state, n_init=1, max_iter=40)
             kmeans.fit(x_data)
         else:
             assert kmeans.n_clusters == self.k
