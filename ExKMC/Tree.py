@@ -121,7 +121,7 @@ class Tree:
         if kmeans is None:
             if self.verbose > 0:
                 print('Finding %d-means' % self.k)
-            kmeans = KMeans(self.k, n_jobs=self.n_jobs, verbose=self.verbose, random_state=self.random_state, n_init=1, max_iter=40)
+            kmeans = KMeans(self.k, verbose=self.verbose, random_state=self.random_state, n_init=1, max_iter=40)
             kmeans.fit(x_data)
         else:
             assert kmeans.n_clusters == self.k
