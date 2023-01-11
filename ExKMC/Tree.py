@@ -290,8 +290,7 @@ class Tree:
             dot_str = "".join(dot_str)
             try:
                 s = Source(dot_str, filename=filename + '.gv', format="png")
-                if view:
-                    s.view()
+                s.render(view=view)
             except Exception as e:
                 print(dot_str)
                 raise e
