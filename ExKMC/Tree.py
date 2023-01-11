@@ -256,7 +256,7 @@ class Tree:
             dr = self.__max_depth__(node.right)
             return 1 + max(dl, dr)
 
-    def plot(self, filename="test", feature_names=None):
+    def plot(self, filename="test", feature_names=None, view=True):
         if not graphviz_available:
             raise Exception("Required package is missing. Please install graphviz")
 
@@ -290,7 +290,8 @@ class Tree:
             dot_str = "".join(dot_str)
             try:
                 s = Source(dot_str, filename=filename + '.gv', format="png")
-                s.view()
+                if view:
+                    s.view()
             except Exception as e:
                 print(dot_str)
                 raise e
